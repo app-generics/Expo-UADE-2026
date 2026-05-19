@@ -465,6 +465,16 @@
       background: var(--blue);
       flex-shrink: 0;
     }
+    .career-pill-alt {
+      background: rgba(245,200,66,0.18);
+      color: var(--navy);
+    }
+    .career-pill-alt .cpill-dot {
+      background: var(--gold-deep);
+    }
+    .alternatives-title {
+      margin-top: 14px;
+    }
 
     .profile-secondary-card {
       background: var(--white);
@@ -654,7 +664,7 @@
           <div class="feature-icon">🎓</div>
           <div class="feature-text">
             Carreras sugeridas
-            <small>Con detalle de cada opción disponible en UADE</small>
+            <small>Conocé opciones vinculadas con tus intereses</small>
           </div>
         </div>
       </div>
@@ -731,7 +741,7 @@
           </div>
         </div>
         <p class="profile-desc" id="main-desc">–</p>
-        <div class="careers-title">Carreras que podrían interesarte</div>
+        <div class="careers-title">Carreras que pueden interesarte</div>
         <div class="careers-list" id="main-careers"></div>
       </div>
 
@@ -752,7 +762,7 @@
       <div class="stand-invite mb-16">
         <div class="blob blob-si"></div>
         <p>
-          <strong>🙌 Mostranos tu resultado en el stand</strong> y te contamos más sobre las carreras que pueden interesarte.
+          <strong>🙌 Mostranos tu resultado en el stand</strong> y te contamos más.
         </p>
       </div>
 
@@ -785,54 +795,80 @@
 const PROFILES = {
   GE: {
     id: 'GE',
-    name: 'Gestión y Estrategia',
+    name: 'Gestión y Estrategia Empresarial',
     emoji: '🏢',
-    desc: 'Te interesa entender cómo funcionan las organizaciones, tomar decisiones, liderar proyectos y tener una mirada integral de la empresa.',
-    careers: ['Administración de Empresas', 'Global Business Management', 'Negocios Digitales']
+    desc: 'Te interesa entender cómo funcionan las organizaciones, tomar decisiones, liderar proyectos y coordinar distintas áreas de una empresa.',
+    careers: ['Administración de Empresas', 'Dirección de Negocios Globales (GBM)'],
+    alternatives: []
+  },
+  CIA: {
+    id: 'CIA',
+    name: 'Contabilidad, Impuestos y Auditoría',
+    emoji: '🧾',
+    desc: 'Te interesa trabajar con información financiera, impuestos, auditoría, control y asesoramiento para empresas o personas.',
+    careers: ['Contador Público'],
+    alternatives: []
   },
   FI: {
     id: 'FI',
     name: 'Finanzas e Inversiones',
     emoji: '📈',
-    desc: 'Te interesan los números, las inversiones, los mercados, la rentabilidad y la toma de decisiones financieras.',
-    careers: ['Finanzas', 'Finanzas Digitales', 'Global Financial Management', 'Economía']
+    desc: 'Te interesan las inversiones, los mercados, la rentabilidad, el análisis financiero y la toma de decisiones sobre dinero.',
+    careers: ['Finanzas', 'Dirección en Finanzas Globales (GFM)', 'Licenciatura en Finanzas Digitales'],
+    alternatives: []
+  },
+  FFD: {
+    id: 'FFD',
+    name: 'Fintech y Finanzas Digitales',
+    emoji: '💳',
+    desc: 'Te interesa la relación entre finanzas y tecnología: fintech, blockchain, criptomonedas, datos financieros y nuevos servicios digitales.',
+    careers: ['Licenciatura en Finanzas Digitales', 'Finanzas'],
+    alternatives: ['Tecnicatura Universitaria en Finanzas Digitales']
   },
   MCC: {
     id: 'MCC',
-    name: 'Marketing y Comunicación Comercial',
+    name: 'Marketing, Marcas y Consumidor',
     emoji: '📣',
-    desc: 'Te interesa entender al consumidor, desarrollar marcas, pensar estrategias comerciales y comunicar productos o servicios.',
-    careers: ['Marketing', 'Negocios Digitales', 'Tecnicatura en Comercio Electrónico']
+    desc: 'Te interesa entender al consumidor, crear marcas, pensar campañas, desarrollar productos y tomar decisiones comerciales.',
+    careers: ['Marketing', 'Marketing y Comercio Internacional', 'Negocios Digitales'],
+    alternatives: []
   },
-  PO: {
-    id: 'PO',
-    name: 'Personas y Organizaciones',
-    emoji: '🤝',
-    desc: 'Te interesa trabajar con personas, equipos, clima laboral, selección, capacitación y desarrollo del talento.',
-    careers: ['Recursos Humanos']
+  NDE: {
+    id: 'NDE',
+    name: 'Negocios Digitales y Ecommerce',
+    emoji: '🛒',
+    desc: 'Te interesa crear, gestionar o mejorar negocios digitales, ecommerce, plataformas online, experiencia de usuario y estrategias digitales.',
+    careers: ['Negocios Digitales', 'Marketing'],
+    alternatives: ['Tecnicatura Universitaria en Comercio Electrónico e Innovación Digital']
   },
-  EA: {
-    id: 'EA',
-    name: 'Economía y Análisis',
+  EAD: {
+    id: 'EAD',
+    name: 'Economía y Análisis de Datos',
     emoji: '📊',
-    desc: 'Te interesa comprender cómo se mueven los mercados, los precios, las decisiones económicas y el impacto de los datos en empresas, países y personas.',
-    careers: ['Economía', 'Finanzas', 'Global Financial Management']
+    desc: 'Te interesa entender cómo funcionan los mercados, la economía, los precios, los datos y las decisiones que impactan en empresas, países y personas.',
+    careers: ['Economía', 'Finanzas', 'Licenciatura en Finanzas Digitales'],
+    alternatives: []
   },
   CGI: {
     id: 'CGI',
     name: 'Comercio y Gestión Internacional',
     emoji: '🌐',
-    desc: 'Te interesan los negocios internacionales, los idiomas, las culturas, el comercio exterior y las oportunidades globales.',
-    careers: ['Comercio Internacional', 'Global Business Management', 'Global Financial Management']
+    desc: 'Te interesan los negocios entre países, importaciones, exportaciones, logística internacional, culturas, idiomas y mercados globales.',
+    careers: ['Comercio Internacional', 'Dirección de Negocios Globales (GBM)', 'Marketing y Comercio Internacional'],
+    alternatives: []
   },
-  IND: {
-    id: 'IND',
-    name: 'Innovación y Negocios Digitales',
-    emoji: '🚀',
-    desc: 'Te interesa emprender, crear proyectos digitales, vender online, usar tecnología y analizar nuevos modelos de negocio.',
-    careers: ['Negocios Digitales', 'Tecnicatura en Comercio Electrónico', 'Administración de Empresas', 'Marketing']
+  PO: {
+    id: 'PO',
+    name: 'Personas y Organizaciones',
+    emoji: '🤝',
+    desc: 'Te interesa trabajar con personas, equipos, clima laboral, selección, capacitación, cultura organizacional y desarrollo del talento.',
+    careers: ['Recursos Humanos', 'Administración de Empresas'],
+    alternatives: []
   }
 };
+
+const PROFILE_IDS = Object.keys(PROFILES);
+const PROFILE_PRIORITY = ['CIA', 'GE', 'FI', 'FFD', 'MCC', 'NDE', 'EAD', 'CGI', 'PO'];
 
 const QUESTIONS = [
   {
@@ -841,17 +877,27 @@ const QUESTIONS = [
       {
         emoji: '🏢',
         text: 'Entender cómo funciona una empresa y cómo se toman decisiones.',
-        scores: { GE: 3, IND: 1 }
+        scores: { GE: 3, PO: 1 }
+      },
+      {
+        emoji: '🧾',
+        text: 'Trabajar con información financiera, impuestos, auditoría o control.',
+        scores: { CIA: 3, FI: 1 }
       },
       {
         emoji: '💹',
         text: 'Analizar inversiones, dinero y mercados financieros.',
-        scores: { FI: 3, EA: 2 }
+        scores: { FI: 3, EAD: 1 }
+      },
+      {
+        emoji: '💳',
+        text: 'Explorar fintech, pagos digitales, cripto o nuevas finanzas.',
+        scores: { FFD: 3, FI: 1, NDE: 1 }
       },
       {
         emoji: '🎯',
         text: 'Crear marcas, campañas, productos o estrategias comerciales.',
-        scores: { MCC: 3, IND: 2 }
+        scores: { MCC: 3, NDE: 1 }
       },
       {
         emoji: '🤝',
@@ -861,7 +907,7 @@ const QUESTIONS = [
       {
         emoji: '📊',
         text: 'Comprender la economía, los datos y el contexto social.',
-        scores: { EA: 3, FI: 1 }
+        scores: { EAD: 3, FI: 1 }
       },
       {
         emoji: '🌍',
@@ -869,9 +915,9 @@ const QUESTIONS = [
         scores: { CGI: 3, GE: 1 }
       },
       {
-        emoji: '💡',
+        emoji: '🛒',
         text: 'Crear proyectos digitales, vender online o emprender.',
-        scores: { IND: 3, MCC: 1, GE: 1 }
+        scores: { NDE: 3, MCC: 1, FFD: 1 }
       }
     ]
   },
@@ -884,9 +930,19 @@ const QUESTIONS = [
         scores: { GE: 3, PO: 1 }
       },
       {
-        emoji: '🔍',
+        emoji: '🔎',
+        text: 'Auditar, ordenar información contable o analizar impuestos.',
+        scores: { CIA: 3, FI: 1 }
+      },
+      {
+        emoji: '📈',
         text: 'Evaluar si una inversión conviene o no.',
-        scores: { FI: 3, EA: 1 }
+        scores: { FI: 3, EAD: 1 }
+      },
+      {
+        emoji: '⚡',
+        text: 'Pensar soluciones financieras digitales para personas o empresas.',
+        scores: { FFD: 3, FI: 1, NDE: 1 }
       },
       {
         emoji: '🚀',
@@ -901,17 +957,17 @@ const QUESTIONS = [
       {
         emoji: '📉',
         text: 'Analizar por qué suben los precios o cómo impactan las decisiones económicas.',
-        scores: { EA: 3, FI: 1 }
+        scores: { EAD: 3, FI: 1 }
       },
       {
         emoji: '✈️',
-        text: 'Coordinar importaciones, exportaciones o acuerdos internacionales.',
+        text: 'Coordinar importaciones, exportaciones, logística o acuerdos internacionales.',
         scores: { CGI: 3, FI: 1 }
       },
       {
-        emoji: '🛒',
+        emoji: '📲',
         text: 'Crear una tienda online o mejorar una experiencia digital.',
-        scores: { IND: 3, MCC: 2 }
+        scores: { NDE: 3, MCC: 2 }
       }
     ]
   },
@@ -925,13 +981,23 @@ const QUESTIONS = [
       },
       {
         emoji: '🧮',
-        text: 'Analizar números y tomar decisiones con datos.',
-        scores: { FI: 2, EA: 2, IND: 1 }
+        text: 'Ser detallista con números, normas, registros y documentación.',
+        scores: { CIA: 3, FI: 1 }
+      },
+      {
+        emoji: '💰',
+        text: 'Analizar números y tomar decisiones financieras con datos.',
+        scores: { FI: 3, EAD: 1 }
+      },
+      {
+        emoji: '💻',
+        text: 'Combinar finanzas, tecnología y datos.',
+        scores: { FFD: 3, FI: 1, NDE: 1 }
       },
       {
         emoji: '🗣️',
         text: 'Comunicar ideas y entender al consumidor.',
-        scores: { MCC: 3, IND: 1 }
+        scores: { MCC: 3, NDE: 1 }
       },
       {
         emoji: '❤️',
@@ -941,7 +1007,7 @@ const QUESTIONS = [
       {
         emoji: '🔭',
         text: 'Interpretar información, tendencias y escenarios.',
-        scores: { EA: 3, FI: 1 }
+        scores: { EAD: 3, FI: 1 }
       },
       {
         emoji: '🗺️',
@@ -949,9 +1015,9 @@ const QUESTIONS = [
         scores: { CGI: 3, GE: 1 }
       },
       {
-        emoji: '💻',
+        emoji: '🌐',
         text: 'Usar tecnología para crear o mejorar negocios.',
-        scores: { IND: 3, MCC: 1 }
+        scores: { NDE: 3, MCC: 1, FFD: 1 }
       }
     ]
   },
@@ -964,14 +1030,24 @@ const QUESTIONS = [
         scores: { GE: 3, CGI: 1 }
       },
       {
-        emoji: '🏦',
-        text: 'En bancos, fintechs, inversiones o áreas financieras.',
-        scores: { FI: 3, IND: 1 }
+        emoji: '🧾',
+        text: 'En estudios contables, auditoría, impuestos o áreas de control.',
+        scores: { CIA: 3, FI: 1 }
       },
       {
-        emoji: '📲',
-        text: 'En marketing, comunicación, producto, ecommerce o agencias.',
-        scores: { MCC: 3, IND: 2 }
+        emoji: '🏦',
+        text: 'En bancos, inversiones, mercado financiero o áreas financieras.',
+        scores: { FI: 3, EAD: 1 }
+      },
+      {
+        emoji: '💳',
+        text: 'En fintechs, bancos digitales, pagos, cripto o tecnología financiera.',
+        scores: { FFD: 3, FI: 1, NDE: 1 }
+      },
+      {
+        emoji: '📣',
+        text: 'En marketing, comunicación, producto, investigación de mercado o agencias.',
+        scores: { MCC: 3, NDE: 1 }
       },
       {
         emoji: '🌟',
@@ -981,7 +1057,7 @@ const QUESTIONS = [
       {
         emoji: '📚',
         text: 'En consultoras, organismos, investigación o análisis económico.',
-        scores: { EA: 3, FI: 1 }
+        scores: { EAD: 3, FI: 1 }
       },
       {
         emoji: '🌏',
@@ -990,8 +1066,8 @@ const QUESTIONS = [
       },
       {
         emoji: '⚡',
-        text: 'En startups, negocios digitales, ecommerce o proyectos propios.',
-        scores: { IND: 3, MCC: 1, GE: 1 }
+        text: 'En startups, ecommerce, negocios digitales o proyectos propios.',
+        scores: { NDE: 3, MCC: 1, GE: 1 }
       }
     ]
   }
@@ -1003,9 +1079,16 @@ const QUESTIONS = [
 
 let currentQuestion = 0;
 let selectedOption   = null;
-let scores           = { GE: 0, FI: 0, MCC: 0, PO: 0, EA: 0, CGI: 0, IND: 0 };
+let scores           = createEmptyScoreMap();
 // Track +3 answer count per profile for tie-breaking
-let threeCount       = { GE: 0, FI: 0, MCC: 0, PO: 0, EA: 0, CGI: 0, IND: 0 };
+let threeCount       = createEmptyScoreMap();
+
+function createEmptyScoreMap() {
+  return PROFILE_IDS.reduce((acc, id) => {
+    acc[id] = 0;
+    return acc;
+  }, {});
+}
 
 /* ══════════════════════════════════════════════════════════
    NAVIGATION
@@ -1026,8 +1109,8 @@ function showScreen(id) {
 
 function startTest() {
   currentQuestion = 0;
-  scores          = { GE: 0, FI: 0, MCC: 0, PO: 0, EA: 0, CGI: 0, IND: 0 };
-  threeCount      = { GE: 0, FI: 0, MCC: 0, PO: 0, EA: 0, CGI: 0, IND: 0 };
+  scores          = createEmptyScoreMap();
+  threeCount      = createEmptyScoreMap();
   selectedOption  = null;
   loadQuestion();
   showScreen('screen-question');
@@ -1119,42 +1202,79 @@ function nextQuestion() {
 ══════════════════════════════════════════════════════════ */
 
 function showResult() {
-  // Sort profiles by score descending
-  const sorted = Object.entries(scores)
-    .sort(([, a], [, b]) => {
-      if (b !== a) return b - a;
-      // Tie-break by number of +3 answers
-      return threeCount[b[0]] - threeCount[a[0]];
-    });
+  const ranked = getRankedProfiles();
+  const mainResult = ranked[0];
+  const secResult  = ranked[1];
 
-  const [mainId]  = sorted[0];
-  const [secId]   = sorted[1];
-
-  const main = PROFILES[mainId];
-  const sec  = PROFILES[secId];
+  const main = PROFILES[mainResult.id];
+  const sec  = secResult ? PROFILES[secResult.id] : null;
 
   // Populate main profile
   document.getElementById('main-emoji').textContent = main.emoji;
   document.getElementById('main-name').textContent  = main.name;
   document.getElementById('main-desc').textContent  = main.desc;
-  renderCareers('main-careers', main.careers, false);
+  renderMainProfileCareers(main);
 
-  // Populate secondary profile
-  document.getElementById('sec-emoji').textContent  = sec.emoji;
-  document.getElementById('sec-name').textContent   = sec.name;
-  renderCareers('sec-careers', sec.careers, true);
+  // Secondary profile: only if it is close enough and adds new career options
+  const secondaryCard = document.getElementById('profile-secondary-card');
+  const mainCareerSet = new Set([...(main.careers || []), ...(main.alternatives || [])]);
+  const secondIsClose = secResult && secResult.score > 0 && (mainResult.score - secResult.score <= 3);
+
+  let secondaryNewCareers = [];
+  if (sec && secondIsClose) {
+    const secOptions = [...(sec.careers || []), ...(sec.alternatives || [])];
+    secondaryNewCareers = secOptions.filter(c => !mainCareerSet.has(c));
+  }
+
+  if (sec && secondIsClose && secondaryNewCareers.length > 0) {
+    document.getElementById('sec-emoji').textContent  = sec.emoji;
+    document.getElementById('sec-name').textContent   = sec.name;
+    renderCareers('sec-careers', secondaryNewCareers);
+    secondaryCard.style.display = '';
+  } else {
+    secondaryCard.style.display = 'none';
+  }
 
   showScreen('screen-result');
 }
 
-function renderCareers(containerId, careers, isSecondary) {
+function getRankedProfiles() {
+  return PROFILE_IDS
+    .map(id => ({ id, score: scores[id] || 0, threes: threeCount[id] || 0 }))
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      if (b.threes !== a.threes) return b.threes - a.threes;
+      return PROFILE_PRIORITY.indexOf(a.id) - PROFILE_PRIORITY.indexOf(b.id);
+    });
+}
+
+function renderMainProfileCareers(profile) {
+  const container = document.getElementById('main-careers');
+  container.innerHTML = '';
+
+  appendCareerPills(container, profile.careers || []);
+
+  if (profile.alternatives && profile.alternatives.length > 0) {
+    const altTitle = document.createElement('div');
+    altTitle.className = 'careers-title alternatives-title';
+    altTitle.textContent = 'Alternativa de formación corta';
+    container.appendChild(altTitle);
+    appendCareerPills(container, profile.alternatives, true);
+  }
+}
+
+function renderCareers(containerId, careers) {
   const el = document.getElementById(containerId);
   el.innerHTML = '';
+  appendCareerPills(el, careers);
+}
+
+function appendCareerPills(container, careers, isAlternative = false) {
   careers.forEach(c => {
     const pill = document.createElement('div');
-    pill.className = 'career-pill';
+    pill.className = isAlternative ? 'career-pill career-pill-alt' : 'career-pill';
     pill.innerHTML = `<span class="cpill-dot"></span>${c}`;
-    el.appendChild(pill);
+    container.appendChild(pill);
   });
 }
 </script>
