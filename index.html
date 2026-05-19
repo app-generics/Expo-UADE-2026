@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>¿Qué área de Ciencias Económicas va con vos? – UADE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ───────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0B1D3A;
+      --navy-mid:   #162D55;
+      --blue:       #1A5CDB;
+      --blue-light: #3A7BF7;
+      --teal:       #00C9B1;
+      --gold:       #F5C842;
+      --gold-deep:  #D4A017;
+      --white:      #FFFFFF;
+      --off-white:  #F4F6FB;
+      --gray-light: #E8EDF6;
+      --gray-text:  #7B8BAA;
+      --text-dark:  #0B1D3A;
+
+      --radius-sm:  10px;
+      --radius-md:  18px;
+      --radius-lg:  26px;
+
+      --shadow-card: 0 4px 24px rgba(11,29,58,0.10);
+      --shadow-btn:  0 4px 16px rgba(26,92,219,0.25);
+
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+
+      --duration: 380ms;
+      --ease: cubic-bezier(0.34, 1.10, 0.64, 1);
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--navy);
+      font-family: var(--font-body);
+      color: var(--text-dark);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── APP SHELL ──────────────────────────────────────── */
+    #app {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: var(--navy);
+    }
+
+    .screen {
+      width: 100%;
+      max-width: 480px;
+      min-height: 100dvh;
+      display: none;
+      flex-direction: column;
+      background: var(--off-white);
+      position: relative;
+      overflow: hidden;
+      animation: screenIn var(--duration) var(--ease) both;
+    }
+    .screen.active { display: flex; }
+
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(22px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);    }
+    }
+
+    /* ── DECORATIVE BLOBS ───────────────────────────────── */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER BAND ────────────────────────────────────── */
+    .screen-header {
+      background: var(--navy);
+      padding: 20px 24px 28px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .screen-header .blob-h1 {
+      width: 180px; height: 180px;
+      background: var(--blue);
+      opacity: 0.25;
+      top: -60px; right: -50px;
+    }
+    .screen-header .blob-h2 {
+      width: 100px; height: 100px;
+      background: var(--teal);
+      opacity: 0.18;
+      bottom: -30px; left: 10px;
+    }
+
+    .uade-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.20);
+      border-radius: 99px;
+      padding: 5px 12px 5px 8px;
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    .uade-badge .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(0,201,177,0.5); }
+      50%      { box-shadow: 0 0 0 5px rgba(0,201,177,0); }
+    }
+    .uade-badge span {
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── BODY CONTENT ───────────────────────────────────── */
+    .screen-body {
+      flex: 1;
+      padding: 28px 20px 32px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── TYPOGRAPHY ─────────────────────────────────────── */
+    .title-display {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 7vw, 34px);
+      font-weight: 900;
+      line-height: 1.12;
+      color: var(--white);
+      position: relative; z-index: 1;
+    }
+    .title-display em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .subtitle {
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.72);
+      margin-top: 10px;
+      line-height: 1.55;
+      position: relative; z-index: 1;
+    }
+
+    .disclaimer-box {
+      background: rgba(245,200,66,0.13);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 12px 14px;
+      margin-bottom: 28px;
+    }
+    .disclaimer-box p {
+      font-size: 12.5px;
+      color: var(--navy-mid);
+      line-height: 1.55;
+    }
+
+    h2.section-title {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 5vw, 24px);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    .question-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* ── PROGRESS BAR ───────────────────────────────────── */
+    .progress-wrap {
+      margin-bottom: 24px;
+    }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .progress-meta span {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-text);
+    }
+    .progress-meta strong {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--gray-light);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+      border-radius: 99px;
+      transition: width 0.5s var(--ease);
+    }
+
+    /* ── OPTION BUTTONS ─────────────────────────────────── */
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .option-btn {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      border: 2px solid var(--gray-light);
+      border-radius: var(--radius-md);
+      padding: 16px 16px;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.18s, background 0.18s, transform 0.14s, box-shadow 0.18s;
+      box-shadow: var(--shadow-card);
+      -webkit-tap-highlight-color: transparent;
+      width: 100%;
+    }
+    .option-btn:active {
+      transform: scale(0.97);
+      box-shadow: none;
+    }
+    .option-btn .opt-icon {
+      width: 40px; height: 40px;
+      border-radius: var(--radius-sm);
+      background: var(--off-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 20px;
+      transition: background 0.18s;
+    }
+    .option-btn .opt-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+    .option-btn.selected {
+      border-color: var(--blue);
+      background: #EFF4FF;
+      box-shadow: 0 0 0 4px rgba(26,92,219,0.10);
+    }
+    .option-btn.selected .opt-icon {
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+    }
+    .option-btn.selected .opt-icon svg path,
+    .option-btn.selected .opt-icon svg circle,
+    .option-btn.selected .opt-icon svg rect {
+      stroke: white;
+    }
+
+    /* ── PRIMARY BUTTON ─────────────────────────────────── */
+    .btn-primary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 17px 24px;
+      background: linear-gradient(135deg, var(--blue) 0%, var(--blue-light) 100%);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      box-shadow: var(--shadow-btn);
+      transition: opacity 0.18s, transform 0.14s, box-shadow 0.18s;
+      -webkit-tap-highlight-color: transparent;
+      letter-spacing: 0.01em;
+    }
+    .btn-primary:hover { opacity: 0.92; }
+    .btn-primary:active { transform: scale(0.97); box-shadow: none; }
+    .btn-primary:disabled {
+      background: var(--gray-light);
+      color: var(--gray-text);
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    .btn-ghost {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 15px 24px;
+      background: transparent;
+      color: var(--navy-mid);
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 500;
+      border: 2px solid var(--gray-light);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s, transform 0.14s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-ghost:hover { border-color: var(--blue); background: #EFF4FF; }
+    .btn-ghost:active { transform: scale(0.97); }
+
+    .btn-gold {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 17px 24px;
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+      color: var(--navy);
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(212,160,23,0.30);
+      transition: opacity 0.18s, transform 0.14s;
+      -webkit-tap-highlight-color: transparent;
+      letter-spacing: 0.01em;
+    }
+    .btn-gold:active { transform: scale(0.97); }
+
+    /* ── RESULT SCREEN ──────────────────────────────────── */
+    #screen-result .screen-header {
+      padding-bottom: 36px;
+    }
+
+    .result-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0,201,177,0.18);
+      border: 1px solid rgba(0,201,177,0.30);
+      border-radius: 99px;
+      padding: 5px 12px;
+      margin-bottom: 12px;
+      position: relative; z-index: 1;
+    }
+    .result-tag span {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .profile-main-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 16px;
+      border-top: 4px solid var(--blue);
+    }
+    .profile-main-card .profile-icon-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .profile-emoji-badge {
+      width: 54px; height: 54px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+    }
+    .profile-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .profile-main-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--blue);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+    .profile-desc {
+      font-size: 14px;
+      color: #3A4A6B;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .careers-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gray-text);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+    }
+    .careers-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .career-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--off-white);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .career-pill .cpill-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .profile-secondary-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 20px 20px;
+      box-shadow: var(--shadow-card);
+      margin-bottom: 20px;
+      border-top: 4px solid var(--teal);
+    }
+    .profile-secondary-card .profile-emoji-badge {
+      background: linear-gradient(135deg, var(--teal), #00a898);
+    }
+    .profile-secondary-card .career-pill .cpill-dot {
+      background: var(--teal);
+    }
+    .profile-secondary-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3px;
+    }
+
+    .stand-invite {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      border-radius: var(--radius-lg);
+      padding: 22px 20px;
+      margin-bottom: 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .stand-invite .blob-si {
+      width: 120px; height: 120px;
+      background: var(--blue);
+      opacity: 0.2;
+      top: -40px; right: -30px;
+    }
+    .stand-invite p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.6;
+      position: relative; z-index: 1;
+      margin-bottom: 0;
+    }
+    .stand-invite p strong {
+      color: var(--gold);
+    }
+
+    .cta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .divider-text {
+      text-align: center;
+      font-size: 12px;
+      color: var(--gray-text);
+      margin: 4px 0;
+    }
+
+    /* ── WELCOME SCREEN SPECIFICS ───────────────────────── */
+    #screen-welcome .screen-body {
+      justify-content: space-between;
+    }
+    .welcome-features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .feature-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: 0 2px 12px rgba(11,29,58,0.07);
+    }
+    .feature-icon {
+      width: 38px; height: 38px;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--blue), var(--blue-light));
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+    }
+    .feature-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.35;
+    }
+    .feature-text small {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--gray-text);
+      margin-top: 2px;
+    }
+
+    /* ── UTILITY ────────────────────────────────────────── */
+    .mt-auto { margin-top: auto; }
+    .mt-16   { margin-top: 16px; }
+    .mt-12   { margin-top: 12px; }
+    .mb-16   { margin-bottom: 16px; }
+    .mb-24   { margin-bottom: 24px; }
+    .text-center { text-align: center; }
+
+    /* ── RESPONSIVE: wider screens ──────────────────────── */
+    @media (min-width: 480px) {
+      .screen {
+        margin: 0 auto;
+        box-shadow: 0 0 60px rgba(0,0,0,0.4);
+      }
+    }
+
+    /* ── LOADER DOTS (transition feedback) ──────────────── */
+    .loading-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--white);
+      animation: dotBounce 1.2s infinite ease-in-out;
+    }
+    .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes dotBounce {
+      0%,80%,100% { transform: scale(0.6); opacity: 0.5; }
+      40%          { transform: scale(1);   opacity: 1;   }
+    }
+
+    /* ── SCROLL ─────────────────────────────────────────── */
+    .screen { overflow-y: auto; overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--gray-light); border-radius: 99px; }
+  </style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ════════════════════════════════════════════════════
+       SCREEN 1: WELCOME
+  ════════════════════════════════════════════════════════ -->
+  <section id="screen-welcome" class="screen active">
+    <div class="screen-header">
+      <div class="blob blob-h1"></div>
+      <div class="blob blob-h2"></div>
+      <div class="uade-badge">
+        <span class="dot"></span>
+        <span>Expo UADE · Ciencias Económicas</span>
+      </div>
+      <h1 class="title-display">
+        ¿Qué área de<br>Ciencias Económicas<br><em>va con vos?</em>
+      </h1>
+      <p class="subtitle">
+        Respondé 4 preguntas y descubrí carreras que pueden interesarte.
+      </p>
+    </div>
+
+    <div class="screen-body">
+      <div class="disclaimer-box mb-24">
+        <p>Este test es <strong>orientativo</strong>. No define tu elección, pero puede ayudarte a conocer áreas y carreras vinculadas con tus intereses.</p>
+      </div>
+
+      <div class="welcome-features mb-24">
+        <div class="feature-row">
+          <div class="feature-icon">❓</div>
+          <div class="feature-text">
+            4 preguntas rápidas
+            <small>Solo elige la opción que más te represente</small>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-text">
+            Perfil personalizado
+            <small>Descubrí las áreas que conectan con vos</small>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-icon">🎓</div>
+          <div class="feature-text">
+            Carreras sugeridas
+            <small>Con detalle de cada opción disponible en UADE</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-auto">
+        <button class="btn-primary" onclick="startTest()">
+          Empezar test
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════
+       SCREEN 2: QUESTION
+  ════════════════════════════════════════════════════════ -->
+  <section id="screen-question" class="screen">
+    <div class="screen-header">
+      <div class="blob blob-h1"></div>
+      <div class="blob blob-h2"></div>
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <span id="q-progress-label">Pregunta 1 de 4</span>
+          <strong id="q-progress-pct">25%</strong>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill" style="width:25%"></div>
+        </div>
+      </div>
+      <div class="question-label" id="q-number">Pregunta 1</div>
+      <h2 class="title-display" id="q-text" style="font-size: clamp(20px,6vw,28px)">
+        Cargando...
+      </h2>
+    </div>
+
+    <div class="screen-body">
+      <div class="options-list" id="options-list"></div>
+
+      <div class="mt-16">
+        <button class="btn-primary" id="btn-next" onclick="nextQuestion()" disabled>
+          Continuar
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════
+       SCREEN 3: RESULT
+  ════════════════════════════════════════════════════════ -->
+  <section id="screen-result" class="screen">
+    <div class="screen-header">
+      <div class="blob blob-h1"></div>
+      <div class="blob blob-h2"></div>
+      <div class="result-tag">
+        <span>✦ Tu resultado</span>
+      </div>
+      <h1 class="title-display" style="font-size: clamp(22px,6vw,30px)">
+        ¡Encontramos<br>tu <em>perfil!</em>
+      </h1>
+      <p class="subtitle">
+        Estos resultados están basados en tus respuestas. Son un punto de partida para explorar.
+      </p>
+    </div>
+
+    <div class="screen-body">
+      <!-- PERFIL PRINCIPAL -->
+      <div class="profile-main-card" id="profile-main-card">
+        <div class="profile-icon-row">
+          <div class="profile-emoji-badge" id="main-emoji">🎯</div>
+          <div>
+            <div class="profile-main-label">Tu perfil principal</div>
+            <div class="profile-name" id="main-name">Cargando...</div>
+          </div>
+        </div>
+        <p class="profile-desc" id="main-desc">–</p>
+        <div class="careers-title">Carreras que podrían interesarte</div>
+        <div class="careers-list" id="main-careers"></div>
+      </div>
+
+      <!-- PERFIL COMPLEMENTARIO -->
+      <div class="profile-secondary-card" id="profile-secondary-card">
+        <div class="profile-icon-row">
+          <div class="profile-emoji-badge" id="sec-emoji">💡</div>
+          <div>
+            <div class="profile-secondary-label">También podrías conectar con</div>
+            <div class="profile-name" id="sec-name">Cargando...</div>
+          </div>
+        </div>
+        <div class="careers-title">Otras opciones para explorar</div>
+        <div class="careers-list" id="sec-careers"></div>
+      </div>
+
+      <!-- INVITACIÓN AL STAND -->
+      <div class="stand-invite mb-16">
+        <div class="blob blob-si"></div>
+        <p>
+          <strong>🙌 Mostranos tu resultado en el stand</strong> y te contamos más sobre las carreras que pueden interesarte.
+        </p>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-group">
+        <a href="https://www.uade.edu.ar/admisionweb" target="_blank" class="btn-gold">
+          🎓 Inscribite en UADE
+        </a>
+        <a href="https://www.uade.edu.ar/facultad-de-ciencias-economicas/" target="_blank" class="btn-primary">
+          📋 Consultá por estas carreras
+        </a>
+      </div>
+
+      <div class="divider-text">— o —</div>
+
+      <button class="btn-ghost mt-12" onclick="resetTest()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+        Volver a empezar
+      </button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════
+   DATA
+══════════════════════════════════════════════════════════ */
+
+const PROFILES = {
+  GE: {
+    id: 'GE',
+    name: 'Gestión y Estrategia',
+    emoji: '🏢',
+    desc: 'Te interesa entender cómo funcionan las organizaciones, tomar decisiones, liderar proyectos y tener una mirada integral de la empresa.',
+    careers: ['Administración de Empresas', 'Global Business Management', 'Negocios Digitales']
+  },
+  FI: {
+    id: 'FI',
+    name: 'Finanzas e Inversiones',
+    emoji: '📈',
+    desc: 'Te interesan los números, las inversiones, los mercados, la rentabilidad y la toma de decisiones financieras.',
+    careers: ['Finanzas', 'Finanzas Digitales', 'Global Financial Management', 'Economía']
+  },
+  MCC: {
+    id: 'MCC',
+    name: 'Marketing y Comunicación Comercial',
+    emoji: '📣',
+    desc: 'Te interesa entender al consumidor, desarrollar marcas, pensar estrategias comerciales y comunicar productos o servicios.',
+    careers: ['Marketing', 'Negocios Digitales', 'Tecnicatura en Comercio Electrónico']
+  },
+  PO: {
+    id: 'PO',
+    name: 'Personas y Organizaciones',
+    emoji: '🤝',
+    desc: 'Te interesa trabajar con personas, equipos, clima laboral, selección, capacitación y desarrollo del talento.',
+    careers: ['Recursos Humanos']
+  },
+  EA: {
+    id: 'EA',
+    name: 'Economía y Análisis',
+    emoji: '📊',
+    desc: 'Te interesa comprender cómo se mueven los mercados, los precios, las decisiones económicas y el impacto de los datos en empresas, países y personas.',
+    careers: ['Economía', 'Finanzas', 'Global Financial Management']
+  },
+  CGI: {
+    id: 'CGI',
+    name: 'Comercio y Gestión Internacional',
+    emoji: '🌐',
+    desc: 'Te interesan los negocios internacionales, los idiomas, las culturas, el comercio exterior y las oportunidades globales.',
+    careers: ['Comercio Internacional', 'Global Business Management', 'Global Financial Management']
+  },
+  IND: {
+    id: 'IND',
+    name: 'Innovación y Negocios Digitales',
+    emoji: '🚀',
+    desc: 'Te interesa emprender, crear proyectos digitales, vender online, usar tecnología y analizar nuevos modelos de negocio.',
+    careers: ['Negocios Digitales', 'Tecnicatura en Comercio Electrónico', 'Administración de Empresas', 'Marketing']
+  }
+};
+
+const QUESTIONS = [
+  {
+    text: '¿Qué tema te llama más la atención?',
+    options: [
+      {
+        emoji: '🏢',
+        text: 'Entender cómo funciona una empresa y cómo se toman decisiones.',
+        scores: { GE: 3, IND: 1 }
+      },
+      {
+        emoji: '💹',
+        text: 'Analizar inversiones, dinero y mercados financieros.',
+        scores: { FI: 3, EA: 2 }
+      },
+      {
+        emoji: '🎯',
+        text: 'Crear marcas, campañas, productos o estrategias comerciales.',
+        scores: { MCC: 3, IND: 2 }
+      },
+      {
+        emoji: '🤝',
+        text: 'Trabajar con personas, equipos y clima laboral.',
+        scores: { PO: 3, GE: 1 }
+      },
+      {
+        emoji: '📊',
+        text: 'Comprender la economía, los datos y el contexto social.',
+        scores: { EA: 3, FI: 1 }
+      },
+      {
+        emoji: '🌍',
+        text: 'Hacer negocios con otros países y conocer mercados internacionales.',
+        scores: { CGI: 3, GE: 1 }
+      },
+      {
+        emoji: '💡',
+        text: 'Crear proyectos digitales, vender online o emprender.',
+        scores: { IND: 3, MCC: 1, GE: 1 }
+      }
+    ]
+  },
+  {
+    text: '¿En qué desafío te gustaría participar?',
+    options: [
+      {
+        emoji: '📋',
+        text: 'Organizar una empresa para que crezca y funcione mejor.',
+        scores: { GE: 3, PO: 1 }
+      },
+      {
+        emoji: '🔍',
+        text: 'Evaluar si una inversión conviene o no.',
+        scores: { FI: 3, EA: 1 }
+      },
+      {
+        emoji: '🚀',
+        text: 'Lanzar un producto o mejorar una marca.',
+        scores: { MCC: 3, GE: 1 }
+      },
+      {
+        emoji: '👥',
+        text: 'Seleccionar, capacitar o acompañar equipos de trabajo.',
+        scores: { PO: 3, GE: 1 }
+      },
+      {
+        emoji: '📉',
+        text: 'Analizar por qué suben los precios o cómo impactan las decisiones económicas.',
+        scores: { EA: 3, FI: 1 }
+      },
+      {
+        emoji: '✈️',
+        text: 'Coordinar importaciones, exportaciones o acuerdos internacionales.',
+        scores: { CGI: 3, FI: 1 }
+      },
+      {
+        emoji: '🛒',
+        text: 'Crear una tienda online o mejorar una experiencia digital.',
+        scores: { IND: 3, MCC: 2 }
+      }
+    ]
+  },
+  {
+    text: '¿Qué habilidad sentís más cercana a vos?',
+    options: [
+      {
+        emoji: '🦅',
+        text: 'Liderar, organizar y resolver problemas.',
+        scores: { GE: 3, PO: 1 }
+      },
+      {
+        emoji: '🧮',
+        text: 'Analizar números y tomar decisiones con datos.',
+        scores: { FI: 2, EA: 2, IND: 1 }
+      },
+      {
+        emoji: '🗣️',
+        text: 'Comunicar ideas y entender al consumidor.',
+        scores: { MCC: 3, IND: 1 }
+      },
+      {
+        emoji: '❤️',
+        text: 'Escuchar, acompañar y trabajar con personas.',
+        scores: { PO: 3 }
+      },
+      {
+        emoji: '🔭',
+        text: 'Interpretar información, tendencias y escenarios.',
+        scores: { EA: 3, FI: 1 }
+      },
+      {
+        emoji: '🗺️',
+        text: 'Adaptarte a distintas culturas y mirar el mundo de forma global.',
+        scores: { CGI: 3, GE: 1 }
+      },
+      {
+        emoji: '💻',
+        text: 'Usar tecnología para crear o mejorar negocios.',
+        scores: { IND: 3, MCC: 1 }
+      }
+    ]
+  },
+  {
+    text: '¿Dónde te imaginás trabajando en el futuro?',
+    options: [
+      {
+        emoji: '🏗️',
+        text: 'En una empresa, liderando proyectos o áreas.',
+        scores: { GE: 3, CGI: 1 }
+      },
+      {
+        emoji: '🏦',
+        text: 'En bancos, fintechs, inversiones o áreas financieras.',
+        scores: { FI: 3, IND: 1 }
+      },
+      {
+        emoji: '📲',
+        text: 'En marketing, comunicación, producto, ecommerce o agencias.',
+        scores: { MCC: 3, IND: 2 }
+      },
+      {
+        emoji: '🌟',
+        text: 'En recursos humanos, talento, capacitación o comunicación interna.',
+        scores: { PO: 3 }
+      },
+      {
+        emoji: '📚',
+        text: 'En consultoras, organismos, investigación o análisis económico.',
+        scores: { EA: 3, FI: 1 }
+      },
+      {
+        emoji: '🌏',
+        text: 'En multinacionales, comercio exterior, logística o negocios internacionales.',
+        scores: { CGI: 3, GE: 1 }
+      },
+      {
+        emoji: '⚡',
+        text: 'En startups, negocios digitales, ecommerce o proyectos propios.',
+        scores: { IND: 3, MCC: 1, GE: 1 }
+      }
+    ]
+  }
+];
+
+/* ══════════════════════════════════════════════════════════
+   STATE
+══════════════════════════════════════════════════════════ */
+
+let currentQuestion = 0;
+let selectedOption   = null;
+let scores           = { GE: 0, FI: 0, MCC: 0, PO: 0, EA: 0, CGI: 0, IND: 0 };
+// Track +3 answer count per profile for tie-breaking
+let threeCount       = { GE: 0, FI: 0, MCC: 0, PO: 0, EA: 0, CGI: 0, IND: 0 };
+
+/* ══════════════════════════════════════════════════════════
+   NAVIGATION
+══════════════════════════════════════════════════════════ */
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => {
+    s.classList.remove('active');
+    s.style.animation = 'none';
+  });
+  const target = document.getElementById(id);
+  // Trigger reflow so animation replays
+  void target.offsetWidth;
+  target.style.animation = '';
+  target.classList.add('active');
+  target.scrollTop = 0;
+}
+
+function startTest() {
+  currentQuestion = 0;
+  scores          = { GE: 0, FI: 0, MCC: 0, PO: 0, EA: 0, CGI: 0, IND: 0 };
+  threeCount      = { GE: 0, FI: 0, MCC: 0, PO: 0, EA: 0, CGI: 0, IND: 0 };
+  selectedOption  = null;
+  loadQuestion();
+  showScreen('screen-question');
+}
+
+function resetTest() {
+  startTest();
+  showScreen('screen-welcome');
+}
+
+/* ══════════════════════════════════════════════════════════
+   QUESTION LOGIC
+══════════════════════════════════════════════════════════ */
+
+function loadQuestion() {
+  const q       = QUESTIONS[currentQuestion];
+  const qNum    = currentQuestion + 1;
+  const total   = QUESTIONS.length;
+  const pct     = Math.round((qNum / total) * 100);
+
+  selectedOption = null;
+
+  document.getElementById('q-progress-label').textContent = `Pregunta ${qNum} de ${total}`;
+  document.getElementById('q-progress-pct').textContent   = `${pct}%`;
+  document.getElementById('progress-fill').style.width    = `${pct}%`;
+  document.getElementById('q-number').textContent         = `Pregunta ${qNum}`;
+  document.getElementById('q-text').textContent           = q.text;
+  document.getElementById('btn-next').disabled            = true;
+
+  const list = document.getElementById('options-list');
+  list.innerHTML = '';
+
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.setAttribute('aria-label', opt.text);
+    btn.innerHTML = `
+      <div class="opt-icon">${opt.emoji}</div>
+      <span class="opt-text">${opt.text}</span>
+    `;
+    btn.addEventListener('click', () => selectOption(i, btn));
+    list.appendChild(btn);
+  });
+
+  // Change label on last question
+  const nextBtn = document.getElementById('btn-next');
+  if (currentQuestion === QUESTIONS.length - 1) {
+    nextBtn.innerHTML = `Ver mi resultado
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+  } else {
+    nextBtn.innerHTML = `Continuar
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+  }
+}
+
+function selectOption(index, btn) {
+  // Deselect previous
+  document.querySelectorAll('#options-list .option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedOption = index;
+  document.getElementById('btn-next').disabled = false;
+}
+
+function nextQuestion() {
+  if (selectedOption === null) return;
+
+  // Add scores
+  const opt = QUESTIONS[currentQuestion].options[selectedOption];
+  for (const [profile, pts] of Object.entries(opt.scores)) {
+    scores[profile] += pts;
+    if (pts === 3) threeCount[profile]++;
+  }
+
+  currentQuestion++;
+  if (currentQuestion < QUESTIONS.length) {
+    // Re-animate header on question change
+    const header = document.querySelector('#screen-question .screen-header');
+    header.style.animation = 'none';
+    void header.offsetWidth;
+    header.style.animation = 'screenIn 0.35s ease both';
+    loadQuestion();
+  } else {
+    showResult();
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESULT LOGIC
+══════════════════════════════════════════════════════════ */
+
+function showResult() {
+  // Sort profiles by score descending
+  const sorted = Object.entries(scores)
+    .sort(([, a], [, b]) => {
+      if (b !== a) return b - a;
+      // Tie-break by number of +3 answers
+      return threeCount[b[0]] - threeCount[a[0]];
+    });
+
+  const [mainId]  = sorted[0];
+  const [secId]   = sorted[1];
+
+  const main = PROFILES[mainId];
+  const sec  = PROFILES[secId];
+
+  // Populate main profile
+  document.getElementById('main-emoji').textContent = main.emoji;
+  document.getElementById('main-name').textContent  = main.name;
+  document.getElementById('main-desc').textContent  = main.desc;
+  renderCareers('main-careers', main.careers, false);
+
+  // Populate secondary profile
+  document.getElementById('sec-emoji').textContent  = sec.emoji;
+  document.getElementById('sec-name').textContent   = sec.name;
+  renderCareers('sec-careers', sec.careers, true);
+
+  showScreen('screen-result');
+}
+
+function renderCareers(containerId, careers, isSecondary) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  careers.forEach(c => {
+    const pill = document.createElement('div');
+    pill.className = 'career-pill';
+    pill.innerHTML = `<span class="cpill-dot"></span>${c}`;
+    el.appendChild(pill);
+  });
+}
+</script>
+</body>
+</html>
